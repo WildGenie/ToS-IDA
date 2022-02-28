@@ -64,12 +64,12 @@ else:
     # Just look for XRef of GetSessionObject and you'll find LuaExtern__declGlobalFunction
     LuaExtern__declGlobalFunction = 0x0D18570; # ICBT3
 
-    def MakeNameForce (address, name):
+    def MakeNameForce(address, name):
         x = 2;
         newName = name;
         while (MakeNameEx (address, newName, SN_NOWARN) == 0):
             newName = "%s_%d" % (name, x);
-            x = x + 1;
+            x += 1;
         return newName;
 
     # Rename all functions declared with LuaExtern__declGlobalFunction

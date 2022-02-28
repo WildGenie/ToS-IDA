@@ -27,12 +27,12 @@ MakeNameEx (LuaInterface__getInstance, "LuaInterface::getInstance", SN_NOWARN);
 MakeNameEx (LuaInterface__getObject, "LuaInterface::getObject", SN_NOWARN);
 MakeNameEx (LuaInterface__getObjectEx, "LuaInterface::getObjectEx", SN_NOWARN);
 
-def MakeNameForce (address, name):
+def MakeNameForce(address, name):
     x = 2;
     newName = name;
     while (MakeNameEx (address, newName, SN_NOWARN) == 0):
         newName = "%s_%d" % (name, x);
-        x = x + 1;
+        x += 1;
         if x > 300:
             break;
     return newName;
@@ -53,7 +53,7 @@ while occ != BADADDR:
         sidAddress = GetOperandValue (movAddress2, 0);
         strAddress = GetOperandValue (pushAddress, 0);
         MakeData (sidAddress, FF_DWRD, 4, 0);
-        MakeNameForce (sidAddress, "SID_" + GetString (strAddress));
+        MakeNameForce(sidAddress, f"SID_{GetString(strAddress)}");
 
     occ = RnextB (LuaInterface__getInstance, occ);
 
@@ -81,6 +81,6 @@ while occ != BADADDR:
         if (strAddress != None):
             strValue = GetString (strAddress);
             if strValue != None:
-                MakeNameForce (sidAddress, "SID_" + strValue);
-    
+                MakeNameForce(sidAddress, f"SID_{strValue}");
+
     occ = RnextB (LuaInterface__getObjectEx, occ);
